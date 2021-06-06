@@ -1,7 +1,7 @@
 const GoodList = () =>
-  import('./GoodList.vue')
+  import ('./GoodList.vue')
 const GoodAdd = () =>
-  import('./GoodAdd.vue')
+  import ('./GoodAdd.vue')
 
 export {
   GoodList,

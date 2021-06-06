@@ -114,11 +114,11 @@
 </template>
 
 <script>
-import { CateSelect } from "@/components/common/";
-import { mapState, mapMutations } from "vuex";
+import { CateSelect } from '@/components/common/'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
-	name: "GoodList",
+	name: 'GoodList',
 	components: {
 		CateSelect,
 	},
@@ -130,70 +130,70 @@ export default {
 			rightFrom: false,
 			rightTo: false,
 			filter: {
-				text: "",
-				cate: "",
+				text: '',
+				cate: '',
 				size: 2,
 				page: 1,
 				hot: true,
-				date: "",
+				date: '',
 			},
-			input: "",
+			input: '',
 			pickerOptions: {
 				shortcuts: [
 					{
-						text: "近一周",
+						text: '近一周',
 						onClick(picker) {
-							const end = new Date();
-							const start = new Date();
-							start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-							picker.$emit("pick", [start, end]);
+							const end = new Date()
+							const start = new Date()
+							start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+							picker.$emit('pick', [start, end])
 						},
 					},
 					{
-						text: "近一月",
+						text: '近一月',
 						onClick(picker) {
-							const end = new Date();
-							const start = new Date();
-							start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-							picker.$emit("pick", [start, end]);
+							const end = new Date()
+							const start = new Date()
+							start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+							picker.$emit('pick', [start, end])
 						},
 					},
 				],
 			},
-			value1: "",
-			value2: "",
-		};
+			value1: '',
+			value2: '',
+		}
 	},
 	computed: {
-		...mapState("good", ["goodQueryList"]),
+		...mapState('good', ['goodQueryList']),
 	},
 	mounted() {
-		this.initTable(true);
+		this.initTable(true)
 	},
 	activated() {
-		this.filter = this.goodQueryList;
-		this.filter = JSON.parse(JSON.stringify(this.filter));
+		this.filter = this.goodQueryList
+		this.filter = JSON.parse(JSON.stringify(this.filter))
 	},
 	beforeRouteLeave(to, from, next) {
-		if (!new RegExp("/good/add/:").test(to.path)) {
+		if (!new RegExp('/good/add/:').test(to.path)) {
 			this.mutateGoodQueryList({
 				size: this.filter.size,
 				page: this.filter.page,
-				text: "",
-				cate: "",
+				text: '',
+				cate: '',
 				hot: true,
-				date: "",
-			});
+				date: '',
+			})
 		} else {
 			console.log(
-				"去路正确?",
-				new RegExp("/good/add/:").test(to.path),
-				"filter",
+				'去路正确?',
+				new RegExp('/good/add/:').test(to.path),
+				'filter',
 				this.filter
-			);
-			this.mutateGoodQueryList(this.filter);
+			)
+			this.mutateGoodQueryList(this.filter)
 		}
-		next();
+		next()
 	},
 	// beforeRouteEnter(to, from, next) {
 	//   if((new RegExp('/good/add/:')).test(from.path)){
@@ -205,64 +205,64 @@ export default {
 	//   next()
 	//   },
 	methods: {
-		...mapMutations("good", ["mutateGoodQueryList"]),
+		...mapMutations('good', ['mutateGoodQueryList']),
 		// ...mapActions('good',['activeGoodQueryList']),
 		sizeChange(val) {
-			this.filter.size = val;
-			this.initTable();
+			this.filter.size = val
+			this.initTable()
 		},
 		currentChange(val) {
-			this.filter.page = val;
-			this.initTable(true);
+			this.filter.page = val
+			this.initTable(true)
 		},
 		initTable(flag) {
 			if (!flag) {
-				this.filter.page = 1;
+				this.filter.page = 1
 			}
-			this.mutateGoodQueryList(this.filter);
+			this.mutateGoodQueryList(this.filter)
 			this.$api.fetchGoodList(this.filter).then((res) => {
-				this.good = res;
-			});
+				this.good = res
+			})
 		},
 		skipToAdd() {
-			this.$router.history.push("/good/add/0");
+			this.$router.history.push('/good/add/0')
 		},
 		textFilter(val) {
-			this.filter.text = val;
-			this.initTable();
+			this.filter.text = val
+			this.initTable()
 		},
 		delGood(item) {
-			console.log("item", item);
-			this.$confirm(`你确定要删除 ${item.name} 吗？`, "危险", {
-				confirmButtonText: "确定",
-				cancelButtonText: "取消",
-				type: "warning",
+			console.log('item', item)
+			this.$confirm(`你确定要删除 ${item.name} 吗？`, '危险', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning',
 			})
 				.then(() => {
 					// 调接口删除商品
 					this.$api.fetchGoodDel({ id: item._id }).then(() => {
-						this.initTable(true);
-					});
+						this.initTable(true)
+					})
 				})
 				.catch(() => {
 					this.$message({
-						type: "info",
-						message: "已取消删除",
-					});
-				});
+						type: 'info',
+						message: '已取消删除',
+					})
+				})
 		},
 
 		editGood(item) {
-			this.$router.push("/good/add/:" + item._id);
+			this.$router.push('/good/add/:' + item._id)
 		},
 
 		cateFilter(val) {
-			this.filter.page = 1;
-			this.filter.cate = val;
-			this.initTable();
+			this.filter.page = 1
+			this.filter.cate = val
+			this.initTable()
 		},
 	},
-};
+}
 </script>
 
 <style lang="less" scoped>

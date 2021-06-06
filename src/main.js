@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
+import dataV from '@jiaminghi/data-view'
 import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 
@@ -13,6 +14,7 @@ var ElTreeGrid = require('element-tree-grid')
 Vue.component(ElTreeGrid.name, ElTreeGrid)
 
 Vue.use(ElementUI, { size: "small", zIndex: 3000 })
+Vue.use(dataV)
 Vue.config.productionTip = false
 
 import router from './router'
