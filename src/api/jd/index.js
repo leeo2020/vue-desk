@@ -1,26 +1,10 @@
-import fetch from '@/utils/axios'
+import fetch from '@/utils/fetch'
 
 export function fetchQMusic(params) {
 	return fetch({
 		url: '/soso/fcgi-bin/client_search_cp',
 		method: 'get',
 		params,
-	})
-}
-
-export function fetchRegister(data) {
-	return fetch({
-		url: '/api/v1/user/regist',
-		method: 'post',
-		data,
-	})
-}
-
-export function fetchLogin(data) {
-	return fetch({
-		url: '/api/v1/user/login',
-		method: 'post',
-		data,
 	})
 }
 
@@ -72,14 +56,30 @@ export function fetchGeoList(params) {
 	})
 }
 
+export function uploadImg(data) {
+	return fetch({
+		url: '/api/v1/upload/img',
+		method: 'post',
+		data,
+	})
+}
+
+export function uploadImgs(data) {
+	return fetch({
+		url: '/api/v1/upload/imgs',
+		method: 'post',
+		data,
+	})
+}
+
 export default {
 	fetchQMusic,
-	fetchRegister,
-	fetchLogin,
 	fetchGoodList,
 	fetchGoodDetail,
 	fetchGoodAddOrEdit,
 	fetchGoodDel,
 	fetchAllCates,
 	fetchGeoList,
+	uploadImg,
+	uploadImgs,
 }

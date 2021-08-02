@@ -120,14 +120,14 @@ export default {
       this.$emit("change", val);
     },
     loginSubmit() {
-      this.$api.fetchLogin(this.user).then((res) => {
+      this.$api.uc.fetchLogin(this.user).then((res) => {
         console.log("token************", res.token);
         localStorage.setItem("token", res.token);
         this.$router.replace("/");
       });
     },
     registerSubmit() {
-      this.$api.fetchRegister(this.user).then(() => {
+      this.$api.uc.fetchRegister(this.user).then(() => {
         this.$router.replace("/user/login");
       });
     },

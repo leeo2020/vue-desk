@@ -1,4 +1,4 @@
-import fetch from '@/utils/axios'
+import fetch from '@/utils/fetch'
 
 export function fetchGeoLists() {
 	return fetch({

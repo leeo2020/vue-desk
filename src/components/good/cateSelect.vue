@@ -49,7 +49,7 @@ export default {
     }
   },
   mounted() {
-    this.$api.fetchAllCates().then(res=>{
+    this.$api.jd.fetchAllCates().then(res=>{
       this.cateArr = res.list
       this.cate = this.value ?this.value : this.cate
     })

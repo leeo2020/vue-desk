@@ -22,16 +22,13 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapGetters } from 'vuex'
+// import axios from 'axios'
 export default {
   data(){
     return {
-      files:[]
+      files:[],
+      fileList:[]
     }
-  },
-  computed:{
-    ...mapGetters('todo',['total'])
   },
   methods:{
     handleUpload(raw){
@@ -39,23 +36,27 @@ export default {
       },
       async handlePush(){
         this.$refs.upload.submit()
-        let fd=new FormData();
-        fd.append('operator',''+this.total)
+        const fd=new FormData();
         this.files.forEach((el,index)=>{
           fd.append('file'+'_'+index,el.file)
         })
-        axios.post(
-          this.$img.imgUpUrls,
-          fd
-          // { headers: {'Content-Type': 'multipart/form-data'}}
-        ).then(res=>{
-                console.log('结果',res)
-                return null
-              }).catch((err)=>{
-                console.log('结果',err)
-                return null
-              })
-            }
+        this.$api.jd.uploadImgs(fd).then(res=>{
+          console.log('结果',res)
+        }).catch(err=>{
+          console.log('结果',err)
+        })
+
+        // axios.post(
+        //   'http://localhost:8080/api/v1/upload/imgs',
+        //   fd,
+        // ).then(res=>{
+        //         console.log('结果',res)
+        //         return null
+        //       }).catch((err)=>{
+        //         console.log('结果',err)
+        //         return null
+        //       })
+    }
   }
 }
 </script>

@@ -9,6 +9,11 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
 	(config) => {
+		console.log('config', config)
+		if (config.url === '/api/v1/upload/imgs') {
+			config.headers = { Accept: 'application/json, text/plain, */*' }
+			Object.assign(config.headers, { ContentType: 'multipart/form-data' })
+		}
 		return config
 	},
 	function(err) {
@@ -18,7 +23,6 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
 	(res) => {
-		console.log('请求结果', res.status, res.data.code)
 		let rst = null
 		if (res.status === 200) {
 			if (

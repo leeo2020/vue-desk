@@ -22,6 +22,7 @@
 				<el-col :span="4">
 					<CateSelect
 						:cate="filter.cate"
+						:clearable="true"
 						@change="cateFilter"
 						ref="cate"
 					></CateSelect>
@@ -114,7 +115,7 @@
 </template>
 
 <script>
-import { CateSelect } from '@/components/common/'
+import { CateSelect } from '@/components/good/'
 import { mapState, mapMutations } from 'vuex'
 
 export default {

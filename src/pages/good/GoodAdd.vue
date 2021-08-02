@@ -15,6 +15,7 @@
               <CateSelect
                   :value="isAdd?info.cate:''"
                   :cate="info.cate"
+                  :clearable="true"
               ></CateSelect>
           </el-form-item>
 
@@ -55,8 +56,8 @@
 </template>
 
 <script>
-import {CateSelect} from '@/components/common/'
-import {fetchGoodList} from '@/utils/api'
+import {CateSelect} from '@/components/good/'
+console.log('components',CateSelect)
 export default {
    components:{
       CateSelect
@@ -104,7 +105,7 @@ export default {
       }
     },
     mounted(){
-    fetchGoodList().then(res=>{
+    this.$api.jd.fetchGoodList().then(res=>{
        res.list.map(elem=>{
          if(this.$route.params.id){
            if(elem._id===this.$route.params.id.slice(1)){

@@ -1,5 +1,7 @@
-import { jd } from '@/api/'
+import api from '@/api/'
+const { jd } = api
 const { fetchQMusic } = jd
+
 export default {
 	namespaced: true,
 	state: {
