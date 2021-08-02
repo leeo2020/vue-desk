@@ -5,7 +5,18 @@
 </template>
 
 <script>
+import {fetchGeoList} from '@/utils/api'
     export default {
+        created(){
+            this.getGeo()
+        },
+        methods:{
+            getGeo(){
+                fetchGeoList().then(res=>{
+                    console.log('地址列表',res)
+                })
+            }
+        }
     }
 </script>
 

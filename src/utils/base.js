@@ -1,4 +1,5 @@
-//数字转译映射
+const dayjs = require('dayjs')
+  //数字转译映射
 const codeMapper = (code, map) => {
   return map[code];
 };
@@ -51,7 +52,10 @@ const getTimeDiff = (t1, t2) => {
     "秒"
   );
 };
-//遍历深拷贝
+const formateYmd = (val) => {
+    return dayjs(val).format('YYYY-MM-DD')
+  }
+  //遍历深拷贝
 const deepCopy = (obj) => {
   let rst;
   if (typeof obj === "object") {
@@ -100,4 +104,5 @@ module.exports = {
   deepClone,
   nowaDays,
   getTimeDiff,
+  formateYmd
 };

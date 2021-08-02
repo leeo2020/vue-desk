@@ -5,9 +5,8 @@
 </template>
 
 <script>
-import FindVue from './Find.vue'
 export default {
-  name:FindVue
+  name: 'FindNow'
 }
 </script>
 

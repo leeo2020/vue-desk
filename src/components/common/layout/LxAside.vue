@@ -3,14 +3,14 @@
     <div class="lx-logo">
       <img :src="$img.logo" alt="logo" />
     </div>
-    <el-menu class="lx-menu" text-color="fff" active-text-color="ffd04f">
+    <el-menu class="lx-menu" :default-openeds="['1']" text-color="fff" active-text-color="ffd04f">
       <el-submenu
         v-for="group in routes"
         :key="group.id"
         :index="group.id + ''"
       >
         <template slot="title">
-          <i :class="group in routes"></i>
+          <em :class="group in routes" />
           <span v-text="group.text"></span>
         </template>
 
@@ -37,7 +37,9 @@ export default {
       routes,
     };
   },
-  mounted: function () {},
+  mounted(){
+    
+  } 
 };
 </script>
 

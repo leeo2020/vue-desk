@@ -21,13 +21,13 @@
               ></el-input>
             </el-form-item>
 
-            <el-form-item
+            <!-- <el-form-item
               prop="age"
               label="年龄"
               v-if="user.hasOwnProperty('age')"
             >
               <el-input v-model="user.age" @input="input"></el-input>
-            </el-form-item>
+            </el-form-item> -->
 
             <el-form-item
               prop="password"
@@ -53,7 +53,7 @@
         </div>
         <div slot="footer" class="align-btn">
           <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false"
+          <el-button type="primary" @click="onSubmit(isLogin)"
             >确 定</el-button
           >
         </div>
@@ -69,6 +69,10 @@ export default {
     user: {
       type: Object,
     },
+    isLogin:{
+      type: Boolean,
+      default:false,
+    }
   },
   data: function() {
     return {
@@ -126,6 +130,13 @@ export default {
       this.$api.fetchRegister(this.user).then(() => {
         this.$router.replace("/user/login");
       });
+    },
+    onSubmit(bool){
+      if(bool){
+        this.loginSubmit()
+      }else{
+        this.registerSubmit()
+      }
     },
     dialogBeforeClose(){
       this.dialogVisible=false

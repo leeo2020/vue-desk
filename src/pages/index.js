@@ -42,6 +42,8 @@ const DataVDemo = () =>
   import ('./show/DataVDemo.vue')
 const MyTable = () =>
   import ('./show/MyTable.vue')
+const UploadMultiply = () =>
+  import ('@/pages/show/UploadImgs.vue')
 
 const routers = [{
     id: 10,
@@ -210,6 +212,11 @@ const routers = [{
       text: 'MyTable',
       path: '/tb',
       component: MyTable
+    }, {
+      id: 1406,
+      text: '多图上传',
+      path: '/um',
+      component: UploadMultiply
     }]
   }
 ]

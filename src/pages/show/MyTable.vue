@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table border="1" cellspacing="0" cellpadding>
+    <table border="1" cellspacing="0" cellpadding="0">
     <tr style="width:100%;">
       <td class="content-1">陕西</td>
       <td>

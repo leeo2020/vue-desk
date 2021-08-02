@@ -1,5 +1,5 @@
 <template>
-  <Login :user="user" @change="change"></Login>
+  <Login :user="user" :isLogin="true" @change="change"></Login>
 </template>
 
 <script>
@@ -13,7 +13,7 @@ export default {
     return {
       user:{
         username:'admin',
-        password:'123abc',
+        password:'abc123',
         age:19
       }
     }

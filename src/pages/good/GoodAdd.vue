@@ -98,7 +98,7 @@ export default {
       this.isShow=false
     },
       submitForm(){
-        this.$api.fetchGoodAddOrEdit(this.info).then(()=>{
+        this.$api.jd.fetchGoodAddOrEdit(this.info).then(()=>{
           this.$router.replace('/good/list')
         })
       }

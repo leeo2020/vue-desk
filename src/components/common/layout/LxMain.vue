@@ -1,9 +1,9 @@
 <template>
   <div class="lx-main">
-    <keep-alive>
-      <router-view name='default' v-if="$route.meta.keepAlive"></router-view>
+    <keep-alive  v-if="$route.meta.keepAlive">
+      <router-view name='default'></router-view>
     </keep-alive>
-     <router-view name='default' v-if="!$route.meta.keepAlive"></router-view>
+     <router-view name='default' v-else></router-view>
     </div>
 </template>
 

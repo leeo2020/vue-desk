@@ -1,12 +1,37 @@
 <template>
   <div>
   <h2>昨日回顾</h2>
+  <el-cascader
+    :options="options"
+    v-model="value"
+    @change="change">
+  </el-cascader>
   </div>
 </template>
 
 <script>
-export default {
 
+export default {
+  name: 'FindPast',
+  data(){
+    return {
+      options:[],
+      value:''
+    }
+  },
+  mounted(){
+    this.getGeolist()
+    console.log('this.$api.geo',this.$api.geo,this.$api.jd)
+  },
+  methods:{
+    getGeolist(){
+      this.$api.geo.fetchProvinceLists().then(res=>{
+        console.log('res',res)
+        this.options = res.list
+      })
+    },
+    change(){}
+  }
 }
 </script>
 

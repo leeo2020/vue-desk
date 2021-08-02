@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import axios from 'axios'
   export default {
     methods: {
       getCheckedNodes() {
@@ -43,9 +44,22 @@
       },
       resetChecked() {
         this.$refs.tree.setCheckedKeys([]);
+      },
+      getMock(){
+        axios.get('/parameter/query').then(res=>{
+          console.log('res',res)
+        })
+      },
+       fetchMock(){
+        axios.get('/login').then(res=>{
+          console.log('login',res)
+        })
       }
     },
-
+    created(){
+      this.getMock(),
+      this.fetchMock()
+    },
     data() {
       return {
         data: [{

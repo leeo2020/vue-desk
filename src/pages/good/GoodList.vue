@@ -21,7 +21,7 @@
 				</el-col>
 				<el-col :span="4">
 					<CateSelect
-						v-model="filter.cate"
+						:cate="filter.cate"
 						@change="cateFilter"
 						ref="cate"
 					></CateSelect>
@@ -220,7 +220,7 @@ export default {
 				this.filter.page = 1
 			}
 			this.mutateGoodQueryList(this.filter)
-			this.$api.fetchGoodList(this.filter).then((res) => {
+			this.$api.jd.fetchGoodList(this.filter).then((res) => {
 				this.good = res
 			})
 		},
@@ -240,7 +240,7 @@ export default {
 			})
 				.then(() => {
 					// 调接口删除商品
-					this.$api.fetchGoodDel({ id: item._id }).then(() => {
+					this.$api.jd.fetchGoodDel({ id: item._id }).then(() => {
 						this.initTable(true)
 					})
 				})
@@ -257,6 +257,7 @@ export default {
 		},
 
 		cateFilter(val) {
+			console.log('emit',val)
 			this.filter.page = 1
 			this.filter.cate = val
 			this.initTable()

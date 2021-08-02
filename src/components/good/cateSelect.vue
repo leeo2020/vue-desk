@@ -1,7 +1,7 @@
 <template>
 <div class="lx-cate-select">
   <el-select
-    v-model="cate"
+    :value="cate"
     placeholder="请选择品类"
     @change='change'
     :size='size'
@@ -51,16 +51,14 @@ export default {
   mounted() {
     this.$api.fetchAllCates().then(res=>{
       this.cateArr = res.list
-      this.value?this.cate=this.value:this.cate
+      this.cate = this.value ?this.value : this.cate
     })
     // console.log('select this.$refs.mychild',this.$refs.myparent)
   },
   methods: {
-    change() {
-      this.$emit("input", this.cate)
-      // console.log('this.cate',this.cate)
-      this.$emit('change',this.cate)
-      // console.log('this.cate',this.cate)
+    change(val) {
+      console.log('change(val):',val)
+      this.$emit('change',val)
     },
     remoteMethod(query) {
         if (query !== '') {
