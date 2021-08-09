@@ -14,9 +14,10 @@
         style="width: 150px; height: 200px"
       />
       <dv-percent-pond :config="config3" style="width: 200px; height: 100px" /> -->
-      <dv-flyline-chart :config="config4" style="width: 100%; height: 100px" />
+      <dv-flyline-chart :config="config4" :dev="true" style="width: 100%; height: 100px" />
       <dv-flyline-chart-enhanced
         :config="config5"
+        :dev="true"
         style="width: 100%; height: 100px"
       />
       <dv-conical-column-chart
@@ -25,7 +26,7 @@
       />
       <dv-digital-flop :config="config7" style="width: 200px; height: 50px" />
       <dv-scroll-board :config="config8" style="width: 500px; height: 220px" />
-      <dv-scroll-ranking-board :config="config9" style="width:500px;height:300px" />
+      <dv-scroll-ranking-board :config="config1" style="width:500px;height:300px" />
     </div>
   </div>
 </template>

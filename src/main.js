@@ -20,6 +20,12 @@ Vue.use(ElementUI, { size: 'small', zIndex: 3000 })
 Vue.use(dataV)
 Vue.config.productionTip = false
 
+Vue.directive('focus', {
+  inserted: function(el) {
+    el.focus()
+  }
+})
+
 import router from './router'
 import store from './store/'
 
@@ -29,7 +35,7 @@ import img from '@/utils/img'
 Vue.prototype.$img = img
 
 new Vue({
-	store,
-	router,
-	render: (h) => h(App),
+  store,
+  router,
+  render: (h) => h(App),
 }).$mount('#app')

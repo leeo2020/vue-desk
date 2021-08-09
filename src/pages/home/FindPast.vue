@@ -3,6 +3,7 @@
   <h2>昨日回顾</h2>
   <el-cascader
     :options="options"
+    :props="props"
     v-model="value"
     @change="change">
   </el-cascader>
@@ -16,6 +17,10 @@ export default {
   data(){
     return {
       options:[],
+      props:{
+        value:'area_code',
+        label:'name'
+      },
       value:''
     }
   },

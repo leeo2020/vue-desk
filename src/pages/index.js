@@ -44,7 +44,8 @@ const MyTable = () =>
   import ('./show/MyTable.vue')
 const UploadMultiply = () =>
   import ('@/pages/show/UploadImgs.vue')
-
+const Live = () =>
+  import ('@/pages/vedio/Live.vue')
 const routers = [{
     id: 10,
     text: '首页',
@@ -217,6 +218,22 @@ const routers = [{
       text: '多图上传',
       path: '/um',
       component: UploadMultiply
+    }, {
+      id: 1407,
+      text: 'pdf',
+      path: '/pdf',
+      component: () =>
+        import ('@/pages/show/ShowPdf')
+    }]
+  }, {
+    icon: 'el-icon-s-home',
+    id: 15,
+    text: '直播',
+    arr: [{
+      id: 1501,
+      text: '直播',
+      path: '/lv',
+      component: Live
     }]
   }
 ]
