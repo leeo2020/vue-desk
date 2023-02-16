@@ -24,19 +24,11 @@
           <FormItem label="DatePicker">
             <el-row>
               <el-col span="11">
-                <DatePicker
-                  type="date"
-                  placeholder="Select date"
-                  v-model="formValidation.startTime"
-                ></DatePicker>
+                <DatePicker type="date" placeholder="Select date" v-model="formValidation.startTime"></DatePicker>
               </el-col>
               <el-col span="2" style="text-align: center">-</el-col>
               <el-col span="11">
-                <TimePicker
-                  type="time"
-                  placeholder="Select time"
-                  v-model="formValidation.endTime"
-                ></TimePicker>
+                <TimePicker type="time" placeholder="Select time" v-model="formValidation.endTime"></TimePicker>
               </el-col>
             </el-row>
           </FormItem>
@@ -62,10 +54,10 @@
         <el-col span="7"> </el-col>
       </el-row>
     </el-form>
-    <Table> </Table>
-  </div>
-</template>        
+</div>
+</template>
 <script>
+
 export default {
   data() {
     return {
@@ -73,22 +65,21 @@ export default {
       areaList: [
         {
           value: 1,
-          label: "监狱1",
+          label: '监狱1',
         },
         {
           value: 2,
-          label: "监狱2",
+          label: '监狱2',
         },
       ],
       formValidate: {
-        area: "",
-        name: "",
-        startTime: "",
-        endTime: "",
+        area: '',
+        name: '',
+        startTime: '',
+        endTime: '',
       },
-    };
+    }
   },
-};
+}
 </script>
-<style lang="less">
-</style>
+<style lang="less"></style>
