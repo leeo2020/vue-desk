@@ -8,28 +8,22 @@
 					<div class="lx-filter-label">名称搜索:</div>
 				</el-col>
 				<el-col :span="4">
-					<el-input
-						v-model="filter.text"
-						@change="textFilter"
-						clearable
-						size="mini"
-					></el-input>
+					<el-input v-model="filter.text" @change="textFilter" clearable size="mini"></el-input>
 				</el-col>
 
 				<el-col :span="4">
 					<div class="lx-filter-label">品类筛选:</div>
 				</el-col>
-				<el-col :span="4">
-					<CateSelect
-						v-model="filter.cate"
-						@change="cateFilter"
-						ref="cate"
-					></CateSelect>
-				</el-col>
+				<!-- <el-col :span="4">
+					<CateSelect v-model="filter.cate" :cate="''" @change="cateFilter" ref="cate"></CateSelect>
+				</el-col> -->
 
 				<el-col :span="10">
 					<el-button type="primary" size="mini" @click="skipToAdd">
 						新增商品
+					</el-button>
+					<el-button type="primary" size="mini" @click="batchSelect">
+						批量选择
 					</el-button>
 				</el-col>
 			</el-row>
@@ -39,29 +33,18 @@
 					<div class="qf-filter-label">日期筛选:</div>
 				</el-col>
 				<el-col :span="4">
-					<el-date-picker
-						v-model="filter.date"
-						type="daterange"
-						size="small"
-						align="left"
-						unlink-panels
-						range-separator="至"
-						start-placeholder="开始日期"
-						end-placeholder="结束日期"
-						prefix-icon=""
-						:picker-options="pickerOptions"
-					>
+					<el-date-picker v-model="filter.date" type="daterange" size="small" align="left" unlink-panels
+						range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" prefix-icon=""
+						:picker-options="pickerOptions">
 					</el-date-picker>
 				</el-col>
 			</el-row>
 		</div>
 		<div class="lx-table">
-			<el-table
-				v-loading
-				:data="good.list"
-				:highlight-current-row="true"
-				style="width: 100%"
-			>
+			<el-table v-loading :data="good.list" highlight-current-row ref="good-table" style="width: 100%">
+				<el-table-column type="selection">
+
+				</el-table-column>
 				<el-table-column prop="data" label="商品" align="center">
 					<template slot-scope="scope">
 						<div class="lx-row-img-wrap">
@@ -81,11 +64,9 @@
 				</el-table-column>
 				<el-table-column label="操作" align="center">
 					<template slot-scope="scope">
-						<el-button size="mini" @click="editGood(scope.row)"
-							>编辑
+						<el-button size="mini" @click="editGood(scope.row)">编辑
 						</el-button>
-						<el-button size="mini" type="danger" @click="delGood(scope.row)"
-							>删除
+						<el-button size="mini" type="danger" @click="delGood(scope.row)">删除
 						</el-button>
 					</template>
 				</el-table-column>
@@ -94,17 +75,9 @@
 		<hr />
 		<!--商品列表显示 -->
 		<div class="lx-page">
-			<el-pagination
-				@size-change="sizeChange"
-				@current-change="currentChange"
-				:current-page="1"
-				:page-sizes="[2, 5, 10, 20, 50, 100]"
-				layout="total, sizes, prev, pager, next, jumper"
-				:page-size.sync="filter.size"
-				hide-on-single-page
-				show-summary
-				:total="good.total"
-			>
+			<el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page="1"
+				:page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" :page-size.sync="filter.size"
+				hide-on-single-page show-summary :total="good.total">
 			</el-pagination>
 		</div>
 		<div>
@@ -114,15 +87,15 @@
 </template>
 
 <script>
-import { CateSelect } from '@/components/common/'
+// import { CateSelect } from '@/components/common/'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
 	name: 'GoodList',
-	components: {
-		CateSelect,
-	},
-	data: function() {
+	// components: {
+	// 	CateSelect,
+	// },
+	data: function () {
 		return {
 			good: {
 				list: [],
@@ -132,7 +105,7 @@ export default {
 			filter: {
 				text: '',
 				cate: '',
-				size: 2,
+				size: 10,
 				page: 1,
 				hot: true,
 				date: '',
@@ -185,25 +158,10 @@ export default {
 				date: '',
 			})
 		} else {
-			console.log(
-				'去路正确?',
-				new RegExp('/good/add/:').test(to.path),
-				'filter',
-				this.filter
-			)
 			this.mutateGoodQueryList(this.filter)
 		}
 		next()
 	},
-	// beforeRouteEnter(to, from, next) {
-	//   if((new RegExp('/good/add/:')).test(from.path)){
-	//     console.log('来路正确',new RegExp('/good/add/:').test(from.path))
-	//     this.rightFrom=true
-	//   }else{
-	//     this.rightFrom=false
-	//   }
-	//   next()
-	//   },
 	methods: {
 		...mapMutations('good', ['mutateGoodQueryList']),
 		// ...mapActions('good',['activeGoodQueryList']),
@@ -257,10 +215,14 @@ export default {
 		},
 
 		cateFilter(val) {
+			console.log('____________', val)
 			this.filter.page = 1
 			this.filter.cate = val
 			this.initTable()
 		},
+		batchSelect() {
+			console.log(this.$refs['good-table'].getSelection)
+		}
 	},
 }
 </script>
@@ -269,41 +231,51 @@ export default {
 .lx-goodlist {
 	height: 100%;
 	width: 100%;
+
 	.lx-serach {
 		margin: 20px 0;
+
 		.el-row {
 			margin: 15px 0;
 		}
 	}
+
 	.lx-table {
 		border-radius: 5px;
 		margin: 20px 0;
 		box-sizing: border-box;
 		overflow: hidden;
+
 		.lx-row-img-wrap {
 			padding-left: 70px;
 			height: 85px;
+
 			.lx-row-img {
 				width: 60px;
 				height: 60px;
+
 				img {
 					width: 100%;
 					height: 100%;
 				}
 			}
 		}
+
 		.el-table__body .el-table__row .current-row {
 			color: #fff;
 			background-color: hsl(160, 76%, 21%) !important;
 		}
 	}
+
 	h3 {
 		height: 50px;
 		text-align: left;
 		line-height: 50px;
 	}
+
 	.lx-page {
 		margin: 20px 0;
 	}
-}</style
+}
+</style
 >>

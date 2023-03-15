@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>昨日回顾</h2>
-</div>
+  </div>
 </template>
 
 <script>

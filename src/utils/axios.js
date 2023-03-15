@@ -9,7 +9,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(config => {
   return config
-}, function(err) {
+}, function (err) {
   return Promise.reject(err)
 })
 
@@ -25,7 +25,7 @@ instance.interceptors.response.use(res => {
     console.log('请求失败')
   }
   return rst
-}, function(err) {
+}, function (err) {
   return Promise.reject(err)
 })
 

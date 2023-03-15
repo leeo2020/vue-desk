@@ -50,11 +50,10 @@
             <Input v-model="formValidation.name" />
           </el-form-item>
         </el-col>
-        <!--为了第一行与第二行对齐-->
         <el-col span="7"> </el-col>
       </el-row>
     </el-form>
-</div>
+  </div>
 </template>
 <script>
 
