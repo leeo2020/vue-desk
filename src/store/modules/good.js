@@ -1,12 +1,15 @@
 export default {
-  namespaced:true,
-  state:{
-    goodQueryList:{}
+  namespaced: true,
+  state: {
+    goodQueryList: {},
+    cateList: []
   },
-  mutations:{
-    mutateGoodQueryList:(state,payload)=>{
-      state.goodQueryList=payload
-      state.goodQueryList=JSON.parse(JSON.stringify(state.goodQueryList))
+  mutations: {
+    mutateGoodQueryList: (state, payload) => {
+      state.goodQueryList = JSON.parse(JSON.stringify(payload))
+    },
+    mutateCateList: (state, payload) => {
+      state.cateList = JSON.parse(JSON.stringify(payload))
     }
   }
   // actions:{

@@ -25,7 +25,6 @@
       />
       <dv-digital-flop :config="config7" style="width: 200px; height: 50px" />
       <dv-scroll-board :config="config8" style="width: 500px; height: 220px" />
-      <dv-scroll-ranking-board :config="config9" style="width:500px;height:300px" />
     </div>
   </div>
 </template>

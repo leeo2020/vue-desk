@@ -1,6 +1,6 @@
 <template>
   <div class="lx-goodadd">
-    <h3>{{ !isAdd ? '商品新增' : '商品编辑' }}</h3>
+    <h3>{{ !isAdd ? "商品新增" : "商品编辑" }}</h3>
     <div class="lx-form">
       <el-form :model="info" :rules="rules" label-width="100px">
         <el-form-item label="商品名称" prop="name" required>
@@ -12,29 +12,52 @@
         </el-form-item>
 
         <el-form-item label="商品品类" prop="cate" required>
-          <CateSelect :cate="isAdd ? '' : info.cate" v-model="info.cate" @change="selectCate" ref="cate"></CateSelect>
+          <CateSelect
+            :cate="isAdd && isAddInit ? '' : info.cate"
+            v-model="info.cate"
+            @change="selectCate"
+            ref="cate"
+          ></CateSelect>
         </el-form-item>
 
         <el-form-item label="活动价格" prop="price" required>
-          <el-input-number :min="0" size="mini" v-model="info.price"></el-input-number>
+          <el-input-number
+            :min="0"
+            size="mini"
+            v-model="info.price"
+          ></el-input-number>
         </el-form-item>
 
         <el-form-item label="商品图片" prop="img">
-          <el-upload :action="$img.imgUpUrl" class="avatar-uploader" :limit=1 :on-success='imgSuccess'
-            list-type="picture-card" :multiple=false>
-            <img v-if="isShow" :src="$img.imgBaseUrl + info.img" class="avatar">
+          <el-upload
+            :action="$img.imgUpUrl"
+            class="avatar-uploader"
+            :limit="1"
+            :on-success="imgSuccess"
+            list-type="picture-card"
+            :multiple="false"
+          >
+            <img
+              v-if="!isAdd"
+              :src="$img.imgBaseUrl + info.img"
+              class="avatar"
+            />
             <i v-else class="el-icon-plus"></i>
           </el-upload>
         </el-form-item>
 
         <el-form-item label="是否热销" prop="hot">
-          <el-switch v-model="info.hot" active-color="#13ce66" inactive-color="grey">
+          <el-switch
+            v-model="info.hot"
+            active-color="#13ce66"
+            inactive-color="grey"
+          >
           </el-switch>
         </el-form-item>
 
         <el-form-item>
           <el-button type="primary" size="mini" @click="submitForm">
-            {{ '确认提交' }}
+            {{ "确认提交" }}
           </el-button>
         </el-form-item>
       </el-form>
@@ -43,77 +66,84 @@
 </template>
 
 <script>
-import { CateSelect } from '@/components/common/'
-import { fetchGoodList } from '@/utils/api'
+import { CateSelect } from "@/components/common/";
+import { fetchGoodList } from "@/utils/api";
 export default {
   components: {
-    CateSelect
+    CateSelect,
   },
   data: function () {
     return {
       info: {
-        name: '',
-        desc: '',
-        cate: '',
+        name: "",
+        desc: "",
+        cate: "",
         price: 0,
-        img: '',
-        hot: false
+        img: "",
+        hot: false,
       },
-      isAdd: null,
-      imageUrl: '',
-      isShow: true,
-      xmodel: {},
+      isAdd: false,
+      isAddInit: true,
+      imageUrl: "",
       rules: {
         name: [
-          { required: true, message: '请输入商品名称', trigger: 'blur' },
-          { min: 2, max: 6, message: '长度在 2 到 6 个字符', trigger: 'blur' }
+          { required: true, message: "请输入商品名称", trigger: "blur" },
+          { min: 2, max: 6, message: "长度在 2 到 6 个字符", trigger: "blur" },
         ],
         desc: [
-          { required: true, message: '请填写商品描述', trigger: 'blur' },
-          { min: 10, max: 20, message: '长度在 10 到 20 个字符', trigger: 'blur' }
+          { required: true, message: "请填写商品描述", trigger: "blur" },
+          {
+            min: 10,
+            max: 20,
+            message: "长度在 10 到 20 个字符",
+            trigger: "blur",
+          },
         ],
-        cate: [
-          { required: true, message: '请选择商品品类', trigger: 'blur' }
-        ]
+        cate: [{ required: true, message: "请选择商品品类", trigger: "blur" }],
       },
       dialogVisible: false,
-      flag: false
-    }
-  }, methods: {
+      flag: false,
+    };
+  },
+  methods: {
     imgSuccess(res, file) {
-      this.info.img = res.data.url
+      this.info.img = res.data.url;
       this.imageUrl = URL.createObjectURL(file.raw);
-      this.isShow = false
     },
     submitForm() {
       this.$api.fetchGoodAddOrEdit(this.info).then(() => {
-      })
+        this.$message({
+          message: "添加成功！",
+          type: "success",
+        });
+        this.$router.back();
+      });
     },
     selectCate(val) {
-      this.info.cate = val
-    }
+      this.info.cate = val;
+      this.isAddInit = false;
+    },
   },
   mounted() {
     if (this.$route.params.id) {
-      this.isAdd = false
-      fetchGoodList().then(res => {
-        const rst = res.list.find(elem => elem._id === this.$route.params.id.slice(1))
-        this.info = rst
-      })
+      this.isAdd = false;
+      fetchGoodList().then((res) => {
+        const rst = res.list.find(
+          (elem) => elem._id === this.$route.params.id.slice(1)
+        );
+        this.info = rst;
+      });
     } else {
-      this.isAdd = true
+      this.isAdd = true;
     }
-    this.isShow = this.isAdd
-    // console.log(this.$refs['cate'].myCate)
-    // this.$refs['cate']._data.myCate = this.isAdd ? '' : this.info.cate
   },
 
   computed: {
     isSHow() {
-      return !this.imageUrl && !this.isAdd
-    }
-  }
-}
+      return !this.imageUrl && !this.isAdd;
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -153,7 +183,7 @@ export default {
 }
 
 .avatar-uploader .el-upload:hover {
-  border-color: #409EFF;
+  border-color: #409eff;
 }
 
 .avatar-uploader-icon {

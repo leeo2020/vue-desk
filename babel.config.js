@@ -5,5 +5,13 @@ module.exports = {
       {
         'injectH': false
       }]
+  ], plugins: [
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "~static/theme"
+      }
+    ]
   ]
 }

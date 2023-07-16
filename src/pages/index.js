@@ -44,7 +44,8 @@ const MyTable = () =>
   import('./show/MyTable.vue')
 const D3Model = () =>
   import('./show/D3Model.vue')
-
+// const VtkDemo = () => import('./show/VtkDemo.jsx')
+const Demo = () => import('./demo/Index.vue')
 const routers = [{
   id: 10,
   text: '首页',
@@ -217,7 +218,26 @@ const routers = [{
     text: 'D3Model',
     path: '/3d',
     component: D3Model
-  }]
+  },
+    // {
+    //   id: 1407,
+    //   text: 'Vtk',
+    //   path: '/vtk',
+    //   component: VtkDemo
+    // }
+  ]
+},
+{
+  id: 15,
+  text: '示例',
+  icon: 'el-icon-s-home',
+  arr: [{
+    id: 1501,
+    text: '视图总览',
+    path: '/demo',
+    component: Demo
+  }
+  ]
 }
 ]
 export default routers
